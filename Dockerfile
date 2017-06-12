@@ -12,6 +12,7 @@ RUN apt-get update &&\
     rm dumb-init.deb &&\
     apt-get purge -y --auto-remove  ca-certificates wget
 
+ENV BOTO_VERSION 2.47.0
 ENV WALE_VERSION 1.0.3
 
 RUN apt-get update &&\
@@ -25,6 +26,7 @@ RUN apt-get update &&\
         python3-pip &&\
     rm -rf /var/lib/apt/lists/* &&\
     pip3 install wal-e==$WALE_VERSION &&\
+    pip3 install boto==$BOTO_VERSION &&\
     rm -rf /tmp/*
 
 ENV STOLON_VERSION 0.6.0
