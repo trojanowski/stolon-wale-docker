@@ -17,6 +17,7 @@ ENV WALE_VERSION 1.0.3
 RUN apt-get update &&\
     apt-get install -y --no-install-recommends \
         build-essential \
+        daemontools \
         lzop \
         pv \
         python3 \
