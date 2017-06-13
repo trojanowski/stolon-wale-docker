@@ -5,7 +5,7 @@ if [ "$1" = "stolon-keeper" ] && [ "$(id -u)" = '0' ]; then
 	if [ "$STKEEPER_DATA_DIR" ]; then
 		mkdir -p "$STKEEPER_DATA_DIR"
 		chmod 700 "$STKEEPER_DATA_DIR"
-		chown postgres "$STKEEPER_DATA_DIR"
+		chown -R postgres "$STKEEPER_DATA_DIR"
 	else
 		echo "Please specify STKEEPER_DATA_DIR"
 		exit 1
