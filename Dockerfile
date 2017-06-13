@@ -46,6 +46,6 @@ RUN apt-get update &&\
     rm -r stolon-v$STOLON_VERSION-linux-$(dpkg --print-architecture) &&\
     rm stolon.tar.gz*
 
-USER postgres
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+COPY stolon-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["dumb-init", "stolon-entrypoint.sh"]
 CMD ["bash", "-c", "echo \"Please specify command\"; exit 1"]
