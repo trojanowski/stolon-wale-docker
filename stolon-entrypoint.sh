@@ -17,11 +17,10 @@ if [ "$1" = "stolon-keeper" ] && [ "$(id -u)" = '0' ]; then
 		chmod 700 "$GNUPGHOME"
 		chown postgres:postgres "$GNUPGHOME"
 		gosu postgres gpg --keyserver keys.gnupg.net --recv-keys "$WALE_GPG_KEY_ID"
-	fi
 
-	if [ "$GPG_OWNERTRUST" ]; then
-		gosu postgres gpg --keyserver keys.gnupg.net --recv-keys "$WALE_GPG_KEY_ID"
-		gosu postgres echo "$GPG_OWNERTRUST" | gpg --import-ownertrust -
+		GPG_FINGERPRINT=$(gpg --fingerprint --with-colons "$WALE_GPG_KEY_ID" | grep ^fpr | tr -d 'fpr:')
+		GPG_OWNERTRUST="$GPG_FINGERPRINT:6:"
+		echo "$GPG_OWNERTRUST" | gosu postgres gpg --import-ownertrust -
 	fi
 fi
 
